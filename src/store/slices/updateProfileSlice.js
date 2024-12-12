@@ -57,7 +57,7 @@ export const updateProfile = (data) => async (dispatch) => {
   try {
     // Sending PUT request to update profile
     const response = await axios.put(
-      "/api/v1/user/update/profile",
+      "https://career-link-backend-62pl.onrender.com/api/v1/user/update/profile",
       data, // Profile data to be updated
       {
         withCredentials: true, // Include cookies in the request
@@ -82,7 +82,7 @@ export const updatePassword = (data) => async (dispatch) => {
   try {
     // Sending PUT request to update password
     const response = await axios.put(
-      "/api/v1/user/update/password",
+      "https://career-link-backend-62pl.onrender.com/api/v1/user/update/password",
       data, // Password data to be updated
       {
         withCredentials: true, // Include cookies in the request

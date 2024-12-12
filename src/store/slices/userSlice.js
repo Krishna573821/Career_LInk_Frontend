@@ -106,7 +106,7 @@ export const register = (data) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest()); // Dispatch register request action
   try {
     const response = await axios.post(
-      "/api/v1/user/register",
+      "https://career-link-backend-62pl.onrender.com/api/v1/user/register",
       data, // User data to register
       {
         withCredentials: true, // Include credentials in the request
@@ -125,7 +125,7 @@ export const login = (data) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest()); // Dispatch login request action
   try {
     const response = await axios.post(
-      "/api/v1/user/login",
+      "https://career-link-backend-62pl.onrender.com/api/v1/user/login",
       data, // Login data
       {
         withCredentials: true, // Include credentials in the request
@@ -144,7 +144,7 @@ export const getUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest()); // Dispatch fetch user request action
   try {
     const response = await axios.get(
-      "/api/v1/user/getuser", // API endpoint to fetch user
+      "https://career-link-backend-62pl.onrender.com/api/v1/user/getuser", // API endpoint to fetch user
       {
         withCredentials: true, // Include credentials in the request
       }
@@ -160,7 +160,7 @@ export const getUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "/api/v1/user/logout", // API endpoint to logout
+      "https://career-link-backend-62pl.onrender.com/api/v1/user/logout", // API endpoint to logout
       {
         withCredentials: true, // Include credentials in the request
       }

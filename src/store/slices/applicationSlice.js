@@ -92,7 +92,7 @@ export const fetchEmployerApplications = () => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForAllApplications());
   try {
     const response = await axios.get(
-      `/api/v1/application/employer/getall`, // Endpoint for fetching all employer applications.
+      `https://career-link-backend-62pl.onrender.com/api/v1/application/employer/getall`, // Endpoint for fetching all employer applications.
       {
         withCredentials: true, // Ensures cookies are sent with the request.
       }
@@ -117,7 +117,7 @@ export const fetchJobSeekerApplications = () => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForMyApplications());
   try {
     const response = await axios.get(
-      `/api/v1/application/jobseeker/getall`, // Endpoint for fetching job seeker's applications.
+      `https://career-link-backend-62pl.onrender.com/api/v1/application/jobseeker/getall`, // Endpoint for fetching job seeker's applications.
       {
         withCredentials: true, // Ensures cookies are sent with the request.
       }
@@ -167,7 +167,7 @@ export const deleteApplication = (id) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForDeleteApplication());
   try {
     const response = await axios.delete(
-      `/api/v1/application/delete/${id}`, // Endpoint for deleting an application by ID.
+      `https://career-link-backend-62pl.onrender.com/api/v1/application/delete/${id}`, // Endpoint for deleting an application by ID.
       { withCredentials: true }
     );
     dispatch(

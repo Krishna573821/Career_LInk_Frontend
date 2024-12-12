@@ -1,0 +1,273 @@
+.account {
+  padding: 40px 100px;
+  min-height: 800px;
+  background-color: #f5f5f5;
+}
+.account .component_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.account .component_header p {
+  font-weight: 500;
+  color: #424242;
+}
+.account .component_header p:last-child span {
+  color: #229799;
+}
+
+.account .container {
+  display: flex;
+}
+.account .container .sidebar {
+  min-width: 252px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.account .container .sidebar h4 {
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #424242;
+}
+.account .container .sidebar .sidebar_links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.account .container .sidebar .sidebar_links button {
+  color: #616161;
+  text-decoration: none;
+  font-weight: 400;
+  transition: 0.3s;
+  border: none;
+  background: transparent;
+}
+.account .container .sidebar .sidebar_links button:hover {
+  color: #229799;
+  transition: 0.3s;
+}
+.account .container .sidebar .sidebar_links .active {
+  color: #229799;
+}
+.account .container .banner {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.account_components {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  min-height: 400px;
+}
+.account_components .view-resume {
+  background: #424242;
+  color: #ffffff;
+  padding: 8px 20px;
+  font-size: 20px;
+  width: fit-content;
+  text-decoration: none;
+  border-radius: 7px;
+}
+.account_components h3 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #229799;
+}
+.account_components div:first-child {
+  font-size: 30px;
+  font-weight: 500;
+}
+.account_components img {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+}
+.account_components div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.account_components div .label-infoTag-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.account_components div .label-infoTag-wrapper span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.account_components div input,
+.account_components div select,
+.account_components div textarea {
+  background: #8080805e;
+  border: none;
+  color: #555;
+  padding: 8px 3px;
+}
+.account_components div input:focus,
+.account_components div select:focus,
+.account_components div textarea:focus {
+  outline: none;
+}
+.sidebar_icon {
+  display: none;
+}
+.account_components .save_change_btn_wrapper {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.save_change_btn_wrapper .btn {
+  width: fit-content;
+}
+.account_components input::file-selector-button {
+  width: 100%;
+  padding: 7px;
+}
+.account_components input[type="file"] {
+  background: none;
+}
+.eye_icon {
+  position: absolute;
+  bottom: 12px;
+  right: 20px;
+  font-size: 24px;
+}
+.update_password_component div input {
+  padding-right: 65px;
+}
+.account_components .inbox_container .card {
+  background: #f5f5f5;
+  padding: 22px 10px;
+  text-decoration: none;
+  color: #424242;
+  font-weight: 500;
+  font-size: 22px;
+  border-radius: 8px;
+}
+.account_components .inbox_container .card:hover {
+  background: rgba(133, 133, 124, 0.19);
+}
+.account_components .applications_container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.account_components .applications_container .card {
+  margin-bottom: 30px;
+  background: #8080803d;
+  padding: 25px 12px;
+  border-radius: 7px;
+}
+.account_components .applications_container .card .sub-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 16px;
+  color: #616161;
+}
+.account_components .applications_container .card .sub-sec span {
+  font-weight: 600;
+  font-size: 20px;
+  color: #424242;
+}
+.account_components .applications_container .card .sub-sec textarea {
+  background: transparent;
+  font-size: 16px;
+}
+.account_components .applications_container .card .btn-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+@media (max-width: 920px) {
+  .account {
+    padding: 40px 20px;
+    min-height: 800px;
+  }
+}
+@media (max-width: 712px) {
+  .account_components h3 {
+    margin-top: 27px;
+  }
+  .account .container .sidebar h4 {
+    color: #ffffff;
+  }
+  .account .component_header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  .sidebar_icon {
+    display: flex;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 100%;
+    position: relative;
+    bottom: -18px;
+  }
+  .move_left {
+    left: 0;
+    transition: 0.3s;
+    background: #424242;
+    z-index: 2;
+  }
+  .move_right {
+    left: 252px;
+    transition: 0.3s;
+    background: #ffffff;
+    z-index: 2;
+  }
+  .move_right svg {
+    font-size: 30px;
+    color: #424242;
+  }
+  .move_left svg {
+    font-size: 30px;
+    color: #ffffff;
+  }
+  .account .container {
+    position: relative;
+  }
+  .account .container .sidebar {
+    position: absolute;
+    transition: 0.3s;
+    left: -100%;
+  }
+  .account .container .showSidebar {
+    left: 0;
+    transition: 0.3s;
+    background: #424242;
+    height: 100%;
+    width: 308px;
+    padding: 20px 5px;
+    z-index: 2;
+  }
+  .left_arrow {
+    transition: 0.3s;
+    transform: rotate(180deg);
+  }
+  .right_arrow {
+    transition: 0.3s;
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 512px) {
+  .save_change_btn_wrapper .btn {
+    width: 100%;
+  }
+  .account_components img {
+    margin: 0 auto;
+  }
+}

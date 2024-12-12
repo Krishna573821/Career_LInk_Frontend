@@ -1,0 +1,75 @@
+.howItWorks {
+  padding: 50px 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  gap: 50px;
+  background: #48cfcb; 
+}
+.howItWorks h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111; 
+  text-transform: uppercase;
+}
+.howItWorks .container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.howItWorks .container .card {
+  background: #fff;
+  padding: 30px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.howItWorks .container .card:hover {
+  transition: 0.3s;
+  transform: translateY(-10px);
+  background: #111;
+  color: #fff;
+}
+.howItWorks .container .card .icon {
+  width: fit-content;
+  display: flex;
+  background: #111;
+  padding: 10px;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+.howItWorks .container .card .icon svg {
+  font-size: 40px;
+  color: #fff;
+}
+.howItWorks .container .card:hover .icon {
+  background: #fff;
+  transition: 0.3s;
+}
+.howItWorks .container .card:hover .icon svg {
+  color: #111;
+}
+.howItWorks .container .card h4 {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.howItWorks .container .card p {
+  color: gray; 
+}
+
+@media (max-width: 1720px) {
+  .howItWorks {
+    padding: 50px 20px;
+  }
+}
+@media (max-width: 600px) {
+  .howItWorks .container .card {
+    padding: 20px;
+  }
+}

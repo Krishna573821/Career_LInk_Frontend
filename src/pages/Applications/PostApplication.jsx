@@ -5,9 +5,9 @@ import {
   clearAllApplicationErrors,
   postApplication,
   resetApplicationSlice,
-} from "../store/slices/applicationSlice";
+} from "../../store/slices/applicationSlice.js";
 import { toast } from "react-toastify";
-import { fetchSingleJob } from "../store/slices/jobSlice";
+import { fetchSingleJob } from "../../store/slices/jobSlice";
 import { IoMdCash } from "react-icons/io";
 import { FaToolbox } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";

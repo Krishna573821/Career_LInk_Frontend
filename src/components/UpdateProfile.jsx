@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import { getUser } from "../store/slices/userSlice";
 
 const UpdateProfile = () => {
-  // Accessing user data and profile update state from Redux store
   const { user } = useSelector((state) => state.user);
   const { loading, error, isUpdated } = useSelector(
     (state) => state.updateProfile
@@ -18,7 +17,6 @@ const UpdateProfile = () => {
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
 
-  // State variables for managing form inputs
   const [name, setName] = useState(user && user.name);
   const [email, setEmail] = useState(user && user.email);
   const [phone, setPhone] = useState(user && user.phone);
@@ -32,55 +30,46 @@ const UpdateProfile = () => {
   const [resume, setResume] = useState(null);
   const [resumePreview, setResumePreview] = useState(user && user.resume?.url);
 
-  // Handle profile update submission
   const handleUpdateProfile = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("address", address);
-
-    // Adding job seeker-specific fields
     if (user && user.role === "Job Seeker") {
       formData.append("firstNiche", firstNiche);
       formData.append("secondNiche", secondNiche);
       formData.append("thirdNiche", thirdNiche);
       formData.append("coverLetter", coverLetter);
     }
-
-    // If a resume file is provided, append it to the form data
     if (resume) {
       formData.append("resume", resume);
     }
-    // Dispatching the updateProfile action to update the profile in the backend
     dispatch(updateProfile(formData));
   };
 
-  // useEffect hook to handle side effects like showing errors and success messages
   useEffect(() => {
     if (error) {
-      toast.error(error); // Display error message if any
+      toast.error(error);
       dispatch(clearAllUpdateProfileErrors());
     }
     if (isUpdated) {
-      toast.success("Profile Updated."); // Display success message when the profile is updated
-      dispatch(getUser()); // Fetch updated user data from backend
-      dispatch(clearAllUpdateProfileErrors()); // Clear errors
+      toast.success("Profile Updated.");
+      dispatch(getUser());
+      dispatch(clearAllUpdateProfileErrors());
     }
   }, [dispatch, loading, error, isUpdated, user]);
 
-  // Handle resume file selection and preview
   const resumeHandler = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       setResumePreview(reader.result);
-      setResume(file); // Store the selected resume file in state
+      setResume(file);
     };
   };
 
-  // List of available job niches for the user to select from
   const nichesArray = [
     "Software Development",
     "Web Development",
@@ -107,13 +96,12 @@ const UpdateProfile = () => {
   return (
     <div className="account_components">
       <h3>Update Profile</h3>
-      {/* User input fields for profile information */}
       <div>
         <label>Full Name</label>
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)} // Updating name state on change
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div>
@@ -121,7 +109,7 @@ const UpdateProfile = () => {
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)} // Updating email state on change
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div>
@@ -129,7 +117,7 @@ const UpdateProfile = () => {
         <input
           type="number"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)} // Updating phone state on change
+          onChange={(e) => setPhone(e.target.value)}
         />
       </div>
       <div>
@@ -137,11 +125,10 @@ const UpdateProfile = () => {
         <input
           type="text"
           value={address}
-          onChange={(e) => setAddress(e.target.value)} // Updating address state on change
+          onChange={(e) => setAddress(e.target.value)}
         />
       </div>
 
-      {/* Conditional rendering for job seeker specific fields */}
       {user && user.role === "Job Seeker" && (
         <>
           <div>
@@ -149,10 +136,9 @@ const UpdateProfile = () => {
             <div
               style={{ display: "flex", flexDirection: "column", gap: "15px" }}
             >
-              {/* Dropdowns for selecting job niches */}
               <select
                 value={firstNiche}
-                onChange={(e) => setFirstNiche(e.target.value)} // Updating first niche state
+                onChange={(e) => setFirstNiche(e.target.value)}
               >
                 {nichesArray.map((element, index) => {
                   return (
@@ -164,7 +150,7 @@ const UpdateProfile = () => {
               </select>
               <select
                 value={secondNiche}
-                onChange={(e) => setSecondNiche(e.target.value)} // Updating second niche state
+                onChange={(e) => setSecondNiche(e.target.value)}
               >
                 {nichesArray.map((element, index) => {
                   return (
@@ -176,7 +162,7 @@ const UpdateProfile = () => {
               </select>
               <select
                 value={thirdNiche}
-                onChange={(e) => setThirdNiche(e.target.value)} // Updating third niche state
+                onChange={(e) => setThirdNiche(e.target.value)}
               >
                 {nichesArray.map((element, index) => {
                   return (
@@ -192,14 +178,13 @@ const UpdateProfile = () => {
             <label>Coverletter</label>
             <textarea
               value={coverLetter}
-              onChange={(e) => setCoverLetter(e.target.value)} // Updating cover letter state
+              onChange={(e) => setCoverLetter(e.target.value)}
               rows={5}
             />
           </div>
           <div>
             <label>Upload Resume</label>
-            <input type="file" onChange={resumeHandler} /> {/* Handle resume file upload */}
-            {/* Display current resume if available */}
+            <input type="file" onChange={resumeHandler} />
             {user && user.resume && (
               <div>
                 <p>Current Resume:</p>
@@ -215,13 +200,13 @@ const UpdateProfile = () => {
           </div>
         </>
       )}
-      {/* Button to save changes */}
       <div className="save_change_btn_wrapper">
         <button
           className="btn"
-          onClick={handleUpdateProfile} // Trigger profile update on click
-          disabled={loading} // Disable button while loading
+          onClick={handleUpdateProfile}
+          disabled={loading}
         >
+          {" "}
           Save Changes
         </button>
       </div>

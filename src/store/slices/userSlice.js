@@ -1,18 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Create a slice for handling user authentication, registration, and logout state
 const userSlice = createSlice({
-  name: "user", // Slice name
+  name: "user",
   initialState: {
-    loading: false, // Tracks the loading state during async operations
-    isAuthenticated: false, // Tracks if the user is authenticated or not
-    user: {}, // Stores user information after login or registration
-    error: null, // Stores any error messages
-    message: null, // Stores success messages
+    loading: false,
+    isAuthenticated: false,
+    user: {},
+    error: null,
+    message: null,
   },
   reducers: {
-    // Reducer to handle the register request state (set loading to true and reset previous state)
     registerRequest(state, action) {
       state.loading = true;
       state.isAuthenticated = false;
@@ -20,23 +18,20 @@ const userSlice = createSlice({
       state.error = null;
       state.message = null;
     },
-    // Reducer to handle successful registration
     registerSuccess(state, action) {
-      state.loading = false; // Set loading to false after success
-      state.isAuthenticated = true; // Set user as authenticated
-      state.user = action.payload.user; // Set user information from the payload
-      state.error = null; // Reset error
-      state.message = action.payload.message; // Set success message
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+      state.error = null;
+      state.message = action.payload.message;
     },
-    // Reducer to handle failed registration
     registerFailed(state, action) {
-      state.loading = false; // Set loading to false after failure
-      state.isAuthenticated = false; // Ensure user is not authenticated
-      state.user = {}; // Reset user data
-      state.error = action.payload; // Set error message
-      state.message = null; // Reset message
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.user = {};
+      state.error = action.payload;
+      state.message = null;
     },
-    // Reducer to handle the login request state (set loading to true and reset previous state)
     loginRequest(state, action) {
       state.loading = true;
       state.isAuthenticated = false;
@@ -44,137 +39,123 @@ const userSlice = createSlice({
       state.error = null;
       state.message = null;
     },
-    // Reducer to handle successful login
     loginSuccess(state, action) {
-      state.loading = false; // Set loading to false after success
-      state.isAuthenticated = true; // Set user as authenticated
-      state.user = action.payload.user; // Set user information from the payload
-      state.error = null; // Reset error
-      state.message = action.payload.message; // Set success message
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+      state.error = null;
+      state.message = action.payload.message;
     },
-    // Reducer to handle failed login
     loginFailed(state, action) {
-      state.loading = false; // Set loading to false after failure
-      state.isAuthenticated = false; // Ensure user is not authenticated
-      state.user = {}; // Reset user data
-      state.error = action.payload; // Set error message
-      state.message = null; // Reset message
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.user = {};
+      state.error = action.payload;
+      state.message = null;
     },
-    // Reducer to handle fetching user details request state
     fetchUserRequest(state, action) {
       state.loading = true;
       state.isAuthenticated = false;
       state.user = {};
       state.error = null;
     },
-    // Reducer to handle successful fetching of user details
     fetchUserSuccess(state, action) {
-      state.loading = false; // Set loading to false after success
-      state.isAuthenticated = true; // Set user as authenticated
-      state.user = action.payload; // Set user information from the payload
-      state.error = null; // Reset error
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload;
+      state.error = null;
     },
-    // Reducer to handle failed fetching of user details
     fetchUserFailed(state, action) {
-      state.loading = false; // Set loading to false after failure
-      state.isAuthenticated = false; // Ensure user is not authenticated
-      state.user = {}; // Reset user data
-      state.error = action.payload; // Set error message
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.user = {};
+      state.error = action.payload;
     },
-    // Reducer to handle logout success
     logoutSuccess(state, action) {
-      state.isAuthenticated = false; // Mark user as not authenticated
-      state.user = {}; // Reset user data
-      state.error = null; // Reset error
+      state.isAuthenticated = false;
+      state.user = {};
+      state.error = null;
     },
-    // Reducer to handle logout failure
     logoutFailed(state, action) {
-      state.isAuthenticated = state.isAuthenticated; // Keep current authentication state
-      state.user = state.user; // Keep current user data
-      state.error = action.payload; // Set error message
+      state.isAuthenticated = state.isAuthenticated;
+      state.user = state.user;
+      state.error = action.payload;
     },
-    // Reducer to clear all errors from the state
     clearAllErrors(state, action) {
-      state.error = null; // Reset error
-      state.user = state.user; // Keep current user data
+      state.error = null;
+      state.user = state.user;
     },
   },
 });
 
-// Async thunk to handle user registration
 export const register = (data) => async (dispatch) => {
-  dispatch(userSlice.actions.registerRequest()); // Dispatch register request action
+  dispatch(userSlice.actions.registerRequest());
   try {
     const response = await axios.post(
       "https://career-link-backend-62pl.onrender.com/api/v1/user/register",
-      data, // User data to register
+      data,
       {
-        withCredentials: true, // Include credentials in the request
-        headers: { "Content-Type": "multipart/form-data" }, // For file uploads
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
       }
     );
-    dispatch(userSlice.actions.registerSuccess(response.data)); // Dispatch success action with response data
-    dispatch(userSlice.actions.clearAllErrors()); // Clear errors
+    dispatch(userSlice.actions.registerSuccess(response.data));
+    dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.registerFailed(error.response.data.message)); // Dispatch failure action with error message
+    dispatch(userSlice.actions.registerFailed(error.response.data.message));
   }
 };
 
-// Async thunk to handle user login
 export const login = (data) => async (dispatch) => {
-  dispatch(userSlice.actions.loginRequest()); // Dispatch login request action
+  dispatch(userSlice.actions.loginRequest());
   try {
     const response = await axios.post(
       "https://career-link-backend-62pl.onrender.com/api/v1/user/login",
-      data, // Login data
+      data,
       {
-        withCredentials: true, // Include credentials in the request
-        headers: { "Content-Type": "application/json" }, // For JSON data
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
       }
     );
-    dispatch(userSlice.actions.loginSuccess(response.data)); // Dispatch success action with response data
-    dispatch(userSlice.actions.clearAllErrors()); // Clear errors
+    dispatch(userSlice.actions.loginSuccess(response.data));
+    dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.loginFailed(error.response.data.message)); // Dispatch failure action with error message
+    dispatch(userSlice.actions.loginFailed(error.response.data.message));
   }
 };
 
-// Async thunk to fetch the current authenticated user details
 export const getUser = () => async (dispatch) => {
-  dispatch(userSlice.actions.fetchUserRequest()); // Dispatch fetch user request action
+  dispatch(userSlice.actions.fetchUserRequest());
   try {
     const response = await axios.get(
-      "https://career-link-backend-62pl.onrender.com/api/v1/user/getuser", // API endpoint to fetch user
+      "https://career-link-backend-62pl.onrender.com/api/v1/user/getuser",
       {
-        withCredentials: true, // Include credentials in the request
+        withCredentials: true,
       }
     );
-    dispatch(userSlice.actions.fetchUserSuccess(response.data.user)); // Dispatch success action with user data
-    dispatch(userSlice.actions.clearAllErrors()); // Clear errors
+    dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
+    dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.fetchUserFailed(error.response.data.message)); // Dispatch failure action with error message
+    dispatch(userSlice.actions.fetchUserFailed(error.response.data.message));
   }
 };
-
-// Async thunk to handle user logout
 export const logout = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "https://career-link-backend-62pl.onrender.com/api/v1/user/logout", // API endpoint to logout
+      "https://career-link-backend-62pl.onrender.com/api/v1/user/logout",
       {
-        withCredentials: true, // Include credentials in the request
+        withCredentials: true,
       }
     );
-    dispatch(userSlice.actions.logoutSuccess()); // Dispatch logout success action
-    dispatch(userSlice.actions.clearAllErrors()); // Clear errors
+    dispatch(userSlice.actions.logoutSuccess());
+    dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.logoutFailed(error.response.data.message)); // Dispatch logout failure action with error message
+    dispatch(userSlice.actions.logoutFailed(error.response.data.message));
   }
 };
 
-// Action to clear all errors related to user actions
 export const clearAllUserErrors = () => (dispatch) => {
-  dispatch(userSlice.actions.clearAllErrors()); // Dispatch action to clear all errors
+  dispatch(userSlice.actions.clearAllErrors());
 };
 
-export default userSlice.reducer; // Export the reducer for the slice
+export default userSlice.reducer;

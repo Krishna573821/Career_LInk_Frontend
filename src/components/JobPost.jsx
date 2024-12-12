@@ -10,7 +10,6 @@ import {
 import { CiCircleInfo } from "react-icons/ci";
 
 const JobPost = () => {
-  // Local state for storing form input values
   const [title, setTitle] = useState("");
   const [jobType, setJobType] = useState("");
   const [location, setLocation] = useState("");
@@ -25,7 +24,6 @@ const JobPost = () => {
   const [personalWebsiteTitle, setPersonalWebsiteTitle] = useState("");
   const [personalWebsiteUrl, setPersonalWebsiteUrl] = useState("");
 
-  // Arrays for predefined values (job niches and cities)
   const nichesArray = [
     "Software Development",
     "Web Development",
@@ -50,37 +48,34 @@ const JobPost = () => {
   ];
 
   const cities = [
-    "Delhi",
-      "Mumbai",
-      "Bangalore",
-      "Hyderabad",
-      "Chennai",
-      "Kolkata",
-      "Pune",
-      "Jaipur",
-      "Lucknow",
-      "Kanpur",
-      "Nagpur",
-      "Indore",
-      "Bhopal",
-      "Patna",
-      "Ludhiana",
-      "Agra",
-      "Nashik",
-      "Faridabad",
-      "Meerut",
-      "Varanasi",
+    "Karachi",
+    "Lahore",
+    "Islamabad",
+    "Rawalpindi",
+    "Faisalabad",
+    "Multan",
+    "Hyderabad",
+    "Quetta",
+    "Peshawar",
+    "Sialkot",
+    "Gujranwala",
+    "Sargodha",
+    "Bahawalpur",
+    "Sukkur",
+    "Mardan",
+    "Mingora",
+    "Sheikhupura",
+    "Mandi Bahauddin",
+    "Larkana",
+    "Nawabshah",
   ];
 
-  // Redux state to get authentication status and job state
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const { loading, error, message } = useSelector((state) => state.jobs);
   const dispatch = useDispatch();
 
-  // Function to handle posting a job
   const handlePostJob = (e) => {
     const formData = new FormData();
-    // Append form data values for each input field
     formData.append("title", title);
     formData.append("jobType", jobType);
     formData.append("location", location);
@@ -88,36 +83,33 @@ const JobPost = () => {
     formData.append("introduction", introduction);
     formData.append("responsibilities", responsibilities);
     formData.append("qualifications", qualifications);
-    offers && formData.append("offers", offers); // Optional field
+    offers && formData.append("offers", offers);
     formData.append("jobNiche", jobNiche);
     formData.append("salary", salary);
     hiringMultipleCandidates &&
-      formData.append("hiringMultipleCandidates", hiringMultipleCandidates); // Optional field
+      formData.append("hiringMultipleCandidates", hiringMultipleCandidates);
     personalWebsiteTitle &&
-      formData.append("personalWebsiteTitle", personalWebsiteTitle); // Optional field
+      formData.append("personalWebsiteTitle", personalWebsiteTitle);
     personalWebsiteUrl &&
-      formData.append("personalWebsiteUrl", personalWebsiteUrl); // Optional field
+      formData.append("personalWebsiteUrl", personalWebsiteUrl);
 
-    // Dispatch the action to post the job
     dispatch(postJob(formData));
   };
 
-  // useEffect hook to handle error and success messages from Redux state
   useEffect(() => {
     if (error) {
-      toast.error(error); // Show error toast
-      dispatch(clearAllJobErrors()); // Clear errors after showing
+      toast.error(error);
+      dispatch(clearAllJobErrors());
     }
     if (message) {
-      toast.success(message); // Show success toast
-      dispatch(resetJobSlice()); // Reset job slice after showing success
+      toast.success(message);
+      dispatch(resetJobSlice());
     }
   }, [dispatch, error, loading, message]);
 
   return (
     <div className="account_components">
       <h3>Post A Job</h3>
-      {/* Input fields for job details */}
       <div>
         <label>Title</label>
         <input
@@ -180,7 +172,6 @@ const JobPost = () => {
           rows={7}
         />
       </div>
-      {/* Optional field for job offers */}
       <div>
         <div className="label-infoTag-wrapper">
           <label>What We Offer</label>
@@ -195,7 +186,6 @@ const JobPost = () => {
           rows={7}
         />
       </div>
-      {/* Dropdown for job niche */}
       <div>
         <label>Job Niche</label>
         <select value={jobNiche} onChange={(e) => setJobNiche(e.target.value)}>
@@ -214,7 +204,6 @@ const JobPost = () => {
           placeholder="50000 - 800000"
         />
       </div>
-      {/* Optional field for hiring multiple candidates */}
       <div>
         <div className="label-infoTag-wrapper">
           <label>Hiring Multiple Candidates?</label>
@@ -231,7 +220,6 @@ const JobPost = () => {
           <option value="No">No</option>
         </select>
       </div>
-      {/* Optional fields for personal website title and URL */}
       <div>
         <div className="label-infoTag-wrapper">
           <label>Personal Website Name</label>
@@ -243,7 +231,7 @@ const JobPost = () => {
           type="text"
           value={personalWebsiteTitle}
           onChange={(e) => setPersonalWebsiteTitle(e.target.value)}
-          placeholder="Personal Website Name/Title"
+          placeholder="Peronsal Website Name/Title"
         />
       </div>
       <div>
@@ -257,10 +245,9 @@ const JobPost = () => {
           type="text"
           value={personalWebsiteUrl}
           onChange={(e) => setPersonalWebsiteUrl(e.target.value)}
-          placeholder="Personal Website Link (URL)"
+          placeholder="Peronsal Website Link (URL)"
         />
       </div>
-      {/* Button to submit the job post */}
       <div>
         <button
           style={{ margin: "0 auto" }}

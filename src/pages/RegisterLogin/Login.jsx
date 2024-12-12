@@ -1,44 +1,40 @@
-import "./Register.css" // Importing CSS for the register/login page
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"; // Importing hooks for dispatching actions and accessing Redux state
-import { Link, useNavigate } from "react-router-dom"; // Importing React Router components for navigation
-import { clearAllUserErrors, login } from "../../store/slices/userSlice"; // Importing actions from Redux slice
-import { toast } from "react-toastify"; // Importing toast notification for error messages
-import { FaRegUser } from "react-icons/fa"; // Importing icon for role selection
-import { MdOutlineMailOutline } from "react-icons/md"; // Importing email icon
-import { RiLock2Fill } from "react-icons/ri"; // Importing password icon
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { clearAllUserErrors, login } from "../store/slices/userSlice";
+import { toast } from "react-toastify";
+import { FaRegUser } from "react-icons/fa";
+import { MdOutlineMailOutline } from "react-icons/md";
+import { RiLock2Fill } from "react-icons/ri";
 
 const Login = () => {
-  const [role, setRole] = useState(""); // State for the selected role (Employer or Job Seeker)
-  const [email, setEmail] = useState(""); // State for the email input
-  const [password, setPassword] = useState(""); // State for the password input
+  const [role, setRole] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // Extracting loading, authentication status, and error from the Redux state
   const { loading, isAuthenticated, error } = useSelector(
     (state) => state.user
   );
 
-  const dispatch = useDispatch(); // Dispatch function for Redux actions
-  const navigateTo = useNavigate(); // React Router's navigate function for redirection
+  const dispatch = useDispatch();
+  const navigateTo = useNavigate();
 
-  // Handle form submission
   const handleLogin = (e) => {
-    e.preventDefault(); // Preventing default form submission behavior
+    e.preventDefault();
     const formData = new FormData();
-    formData.append("role", role); // Adding role to form data
-    formData.append("email", email); // Adding email to form data
-    formData.append("password", password); // Adding password to form data
-    dispatch(login(formData)); // Dispatching login action with form data
+    formData.append("role", role);
+    formData.append("email", email);
+    formData.append("password", password);
+    dispatch(login(formData));
   };
 
-  // Effect hook to handle side effects (error handling and redirection)
   useEffect(() => {
     if (error) {
-      toast.error(error); // Displaying error toast if there's an error
-      dispatch(clearAllUserErrors()); // Clearing error after displaying it
+      toast.error(error);
+      dispatch(clearAllUserErrors());
     }
     if (isAuthenticated) {
-      navigateTo("/"); // Redirecting to home if user is authenticated
+      navigateTo("/");
     }
   }, [dispatch, error, loading, isAuthenticated]);
 
@@ -47,18 +43,18 @@ const Login = () => {
       <section className="authPage">
         <div className="container login-container">
           <div className="header">
-            <h3>Login to your account</h3> {/* Heading for the login form */}
+            <h3>Login to your account</h3>
           </div>
-          <form onSubmit={handleLogin}> {/* Form for user login */}
+          <form onSubmit={handleLogin}>
             <div className="inputTag">
               <label>Login As</label>
               <div>
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Select Role</option> {/* Default option */}
-                  <option value="Employer">Login as an Employer</option> {/* Employer option */}
-                  <option value="Job Seeker">Login as a Job Seeker</option> {/* Job Seeker option */}
+                  <option value="">Select Role</option>
+                  <option value="Employer">Login as an Employer</option>
+                  <option value="Job Seeker">Login as a Job Seeker</option>
                 </select>
-                <FaRegUser /> {/* Icon for role selection */}
+                <FaRegUser />
               </div>
             </div>
             <div className="inputTag">
@@ -68,9 +64,9 @@ const Login = () => {
                   type="email"
                   placeholder="youremail@gmail.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} // Handling email input change
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-                <MdOutlineMailOutline /> {/* Icon for email field */}
+                <MdOutlineMailOutline />
               </div>
             </div>
             <div className="inputTag">
@@ -80,15 +76,15 @@ const Login = () => {
                   type="password"
                   placeholder="Your Password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Handling password input change
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-                <RiLock2Fill /> {/* Icon for password field */}
+                <RiLock2Fill />
               </div>
             </div>
-            <button type="submit" disabled={loading}> {/* Submit button, disabled when loading */}
+            <button type="submit" disabled={loading}>
               Login
             </button>
-            <Link to={"/register"}>Register Now</Link> {/* Link to the register page */}
+            <Link to={"/register"}>Register Now</Link>
           </form>
         </div>
       </section>

@@ -1,55 +1,50 @@
-import React, { useEffect } from "react"; // Importing React and necessary hooks
-import { useSelector, useDispatch } from "react-redux"; // Redux hooks for state management
-import { toast } from "react-toastify"; // Importing toast for notifications
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import {
   clearAllJobErrors,
   deleteJob,
   getMyJobs,
   resetJobSlice,
-} from "../store/slices/jobSlice"; // Importing actions from Redux slice
-import Spinner from "../components/Spinner"; // Importing Spinner component for loading state
+} from "../store/slices/jobSlice";
+import Spinner from "../components/Spinner";
 
 const MyJobs = () => {
-  // Extracting loading state, error, job data (myJobs), and success message from Redux state
-  const { loading, error, myJobs, message } = useSelector((state) => state.jobs);
-  const dispatch = useDispatch(); // Hook to dispatch actions
-
-  // useEffect to handle error, success message, and fetch jobs when component mounts or state changes
+  const { loading, error, myJobs, message } = useSelector(
+    (state) => state.jobs
+  );
+  const dispatch = useDispatch();
   useEffect(() => {
     if (error) {
-      toast.error(error); // Display error message using toast
-      dispatch(clearAllJobErrors()); // Clear errors after displaying
+      toast.error(error);
+      dispatch(clearAllJobErrors());
     }
     if (message) {
-      toast.success(message); // Display success message
-      dispatch(resetJobSlice()); // Reset job slice state after success
+      toast.success(message);
+      dispatch(resetJobSlice());
     }
-    dispatch(getMyJobs()); // Fetch the jobs posted by the user
-  }, [dispatch, error, message]); // Dependency array to re-run when error or message changes
+    dispatch(getMyJobs());
+  }, [dispatch, error, message]);
 
-  // Function to handle job deletion
   const handleDeleteJob = (id) => {
-    dispatch(deleteJob(id)); // Dispatch action to delete job by id
+    dispatch(deleteJob(id));
   };
 
   return (
     <>
-      {loading ? ( // If loading is true, show Spinner component
+      {loading ? (
         <Spinner />
-      ) : myJobs && myJobs.length <= 0 ? ( // If no jobs are found, show a message
+      ) : myJobs && myJobs.length <= 0 ? (
         <h1 style={{ fontSize: "1.4rem", fontWeight: "600" }}>
           You have not posted any job!
         </h1>
       ) : (
-        // If jobs are available, display them
         <>
           <div className="account_components">
             <h3>My Jobs</h3>
             <div className="applications_container">
               {myJobs.map((element) => (
-                // Mapping through myJobs to display each job's details
                 <div className="card" key={element._id}>
-                  {/* Displaying various job details */}
                   <p className="sub-sec">
                     <span>Job Title: </span>
                     {element.title}
@@ -78,13 +73,11 @@ const MyJobs = () => {
                   <p className="sub-sec">
                     <span>Responsibilities:</span> {element.responsibilities}
                   </p>
-                  {/* If there are additional offers, display them */}
                   {element.offers && (
                     <p className="sub-sec">
                       <span>What Are We Offering:</span> {element.offers}
                     </p>
                   )}
-                  {/* Button to delete the job */}
                   <button
                     className="btn"
                     onClick={() => handleDeleteJob(element._id)}

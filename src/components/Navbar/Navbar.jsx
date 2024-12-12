@@ -1,4 +1,3 @@
-import "./Navbar.css";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ const Navbar = () => {
     <>
       <nav className={show ? "navbar show_navbar" : "navbar"}>
         <div className="logo">
-          <h1 style={{fontWeight:"bolder", fontSize:"30px"}}>CAREER <span style={{color:"lightblue",fontWeight:"bolder", fontSize:"30px"}}>LINK</span></h1>
+          <img src="/logo.png" alt="logo" />
         </div>
         <div className="links">
           <ul>

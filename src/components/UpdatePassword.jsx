@@ -1,122 +1,111 @@
-import React, { useEffect, useState } from "react"; // Importing React, useEffect, and useState hooks
-import { useSelector, useDispatch } from "react-redux"; // Importing Redux hooks
-import { useNavigate } from "react-router-dom"; // Importing useNavigate hook (not used in this case)
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   clearAllUpdateProfileErrors,
   updatePassword,
-} from "../store/slices/updateProfileSlice"; // Importing actions for updating password and clearing errors
-import { getUser } from "../store/slices/userSlice"; // Importing action for getting user details
-import { FaRegEyeSlash, FaEye } from "react-icons/fa"; // Importing icons for showing/hiding password
-import { toast } from "react-toastify"; // Importing toast notifications
+} from "../store/slices/updateProfileSlice";
+import { getUser } from "../store/slices/userSlice";
+import { FaRegEyeSlash, FaEye } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const UpdatePassword = () => {
-  // State to manage password fields and visibility of password
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // Extracting relevant state values from the Redux store
   const { loading, error, isUpdated } = useSelector(
     (state) => state.updateProfile
   );
 
-  const dispatch = useDispatch(); // Getting dispatch function from Redux
+  const dispatch = useDispatch();
 
-  // Function to handle password update when the form is submitted
   const handleUpdatePassword = () => {
     const formData = new FormData();
-    formData.append("oldPassword", oldPassword); // Append old password to form data
-    formData.append("newPassword", newPassword); // Append new password to form data
-    formData.append("confirmPassword", confirmPassword); // Append confirm password to form data
-    dispatch(updatePassword(formData)); // Dispatch the action to update the password
+    formData.append("oldPassword", oldPassword);
+    formData.append("newPassword", newPassword);
+    formData.append("confirmPassword", confirmPassword);
+    dispatch(updatePassword(formData));
   };
 
-  // Handling side effects when error or success state changes
   useEffect(() => {
     if (error) {
-      toast.error(error); // Display error notification
-      dispatch(clearAllUpdateProfileErrors()); // Clear errors from the state
+      toast.error(error);
+      dispatch(clearAllUpdateProfileErrors());
     }
     if (isUpdated) {
-      toast.success("Password Updated"); // Display success notification
-      dispatch(getUser()); // Fetch updated user details
-      dispatch(clearAllUpdateProfileErrors()); // Clear errors after successful update
+      toast.success("Password Updated");
+      dispatch(getUser());
+      dispatch(clearAllUpdateProfileErrors());
     }
-  }, [dispatch, loading, error, isUpdated]); // Effect runs on changes to error, isUpdated, and loading
+  }, [dispatch, loading, error, isUpdated]);
 
   return (
     <div className="account_components update_password_component">
       <h3>Update Password</h3>
-      {/* Input for current password */}
       <div>
         <label>Current Password</label>
         <input
-          type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
+          type={showPassword ? "text" : "password"}
           value={oldPassword}
-          onChange={(e) => setOldPassword(e.target.value)} // Update oldPassword state
+          onChange={(e) => setOldPassword(e.target.value)}
         />
-        {/* Show/hide password icon */}
         {showPassword ? (
           <FaRegEyeSlash
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            onClick={() => setShowPassword(!showPassword)}
           />
         ) : (
           <FaEye
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            onClick={() => setShowPassword(!showPassword)}
           />
         )}
       </div>
-      {/* Input for new password */}
       <div>
         <label>New Password</label>
         <input
-          type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
+          type={showPassword ? "text" : "password"}
           value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)} // Update newPassword state
+          onChange={(e) => setNewPassword(e.target.value)}
         />
-        {/* Show/hide password icon */}
         {showPassword ? (
           <FaRegEyeSlash
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            onClick={() => setShowPassword(!showPassword)}
           />
         ) : (
           <FaEye
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            onClick={() => setShowPassword(!showPassword)}
           />
         )}
       </div>
-      {/* Input for confirming new password */}
       <div>
         <label>Confirm Password</label>
         <input
-          type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
+          type={showPassword ? "text" : "password"}
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)} // Update confirmPassword state
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        {/* Show/hide password icon */}
         {showPassword ? (
           <FaRegEyeSlash
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            onClick={() => setShowPassword(!showPassword)}
           />
         ) : (
           <FaEye
             className="eye_icon"
-            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            onClick={() => setShowPassword(!showPassword)}
           />
         )}
       </div>
-      {/* Button to submit the password update */}
       <div className="save_change_btn_wrapper">
         <button
           className="btn"
-          onClick={handleUpdatePassword} // Trigger password update
-          disabled={loading} // Disable button while loading
+          onClick={handleUpdatePassword}
+          disabled={loading}
         >
           Update Password
         </button>

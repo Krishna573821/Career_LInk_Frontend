@@ -190,57 +190,92 @@ const Register = () => {
                      </div>
                   </div>
                   {role === "Job Seeker" && (
-                     <>
-                        <div className="wrapper">
-                           <div className="inputTag">
-                              <label>Your First Niche</label>
-                              <div>
-                                 <select
-                                    value={firstNiche}
-                                    onChange={(e) =>
-                                       setFirstNiche(e.target.value)} // Update first niche
-                                 >
-                                    <option value="">Your Niche</option>
-                                    {nichesArray.map((niche, index) => {
-                                       return (
-                                          <option key={index} value={niche}>
-                                             {niche}
-                                          </option>
-                                       );
-                                    })}
-                                 </select>
-                                 <MdCategory />
-                              </div>
-                           </div>
-                           {/* Similar input fields for second and third niches */}
-                        </div>
-                        <div className="wrapper">
-                           <div className="inputTag">
-                              <label>Coverletter</label>
-                              <div>
-                                 <textarea
-                                    value={coverLetter}
-                                    onChange={(e) =>
-                                       setCoverLetter(e.target.value)} // Update cover letter
-                                    rows={10}
-                                 />
-                              </div>
-                           </div>
-                        </div>
-                        <div className="wrapper">
-                           <div className="inputTag">
-                              <label>Resume</label>
-                              <div>
-                                 <input
-                                    type="file"
-                                    onChange={resumeHandler} // Handle resume file change
-                                    style={{ border: "none" }}
-                                 />
-                              </div>
-                           </div>
-                        </div>
-                     </>
-                  )}
+              <>
+                <div className="wrapper">
+                  <div className="inputTag">
+                    <label>Your First Niche</label>
+                    <div>
+                      <select
+                        value={firstNiche}
+                        onChange={(e) => setFirstNiche(e.target.value)}
+                      >
+                        <option value="">Your Niche</option>
+                        {nichesArray.map((niche, index) => {
+                          return (
+                            <option key={index} value={niche}>
+                              {niche}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <MdCategory />
+                    </div>
+                  </div>
+                  <div className="inputTag">
+                    <label>Your Second Niche</label>
+                    <div>
+                      <select
+                        value={secondNiche}
+                        onChange={(e) => setSecondNiche(e.target.value)}
+                      >
+                        <option value="">Your Niche</option>
+                        {nichesArray.map((niche, index) => {
+                          return (
+                            <option key={index} value={niche}>
+                              {niche}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <MdCategory />
+                    </div>
+                  </div>
+                  <div className="inputTag">
+                    <label>Your Third Niche</label>
+                    <div>
+                      <select
+                        value={thirdNiche}
+                        onChange={(e) => setThirdNiche(e.target.value)}
+                      >
+                        <option value="">Your Niche</option>
+                        {nichesArray.map((niche, index) => {
+                          return (
+                            <option key={index} value={niche}>
+                              {niche}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <MdCategory />
+                    </div>
+                  </div>
+                </div>
+                <div className="wrapper">
+                  <div className="inputTag">
+                    <label>Coverletter</label>
+                    <div>
+                      <textarea
+                        value={coverLetter}
+                        onChange={(e) => setCoverLetter(e.target.value)}
+                        rows={10}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="wrapper">
+                  <div className="inputTag">
+                    <label>Resume</label>
+                    <div>
+                      <input
+                        type="file"
+                        onChange={resumeHandler}
+                        style={{ border: "none" }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
                   <button type="submit" disabled={loading}>
                      Register
                   </button>

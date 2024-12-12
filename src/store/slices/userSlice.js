@@ -141,18 +141,29 @@ export const getUser = () => async (dispatch) => {
 };
 export const logout = () => async (dispatch) => {
   try {
-    const response = await axios.get(
+    // Make the logout request
+    await axios.get(
       "https://career-link-backend-62pl.onrender.com/api/v1/user/logout",
       {
         withCredentials: true,
       }
     );
+
+    // Dispatch logout success action and clear any errors
     dispatch(userSlice.actions.logoutSuccess());
     dispatch(userSlice.actions.clearAllErrors());
+
+    // Return a resolved promise to indicate the success of the action
+    return Promise.resolve();
   } catch (error) {
-    dispatch(userSlice.actions.logoutFailed(error.response.data.message));
+    // Dispatch logout failure action with the error message
+    dispatch(userSlice.actions.logoutFailed(error.response?.data?.message || 'Logout failed'));
+
+    // Return a rejected promise in case of an error
+    return Promise.reject(error);
   }
 };
+
 
 export const clearAllUserErrors = () => (dispatch) => {
   dispatch(userSlice.actions.clearAllErrors());

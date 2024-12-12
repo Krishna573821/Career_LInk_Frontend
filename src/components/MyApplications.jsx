@@ -19,7 +19,7 @@ const MyApplications = () => {
 
   useEffect(() => {
     dispatch(fetchJobSeekerApplications());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (error) {

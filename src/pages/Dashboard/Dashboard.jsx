@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { logout, clearAllUserErrors } from "../store/slices/userSlice";
+import { logout, clearAllUserErrors } from "../../store/slices/userSlice.js";
 import { LuMoveRight } from "react-icons/lu";
-import MyProfile from "../components/MyProfile";
-import UpdateProfile from "../components/UpdateProfile";
-import UpdatePassword from "../components/UpdatePassword";
-import MyJobs from "../components/MyJobs";
-import JobPost from "../components/JobPost";
-import Applications from "../components/Applications";
-import MyApplications from "../components/MyApplications";
+import MyProfile from "../../components/MyProfile.jsx";
+import UpdateProfile from "../../components/UpdateProfile.jsx";
+import UpdatePassword from "../components/UpdatePassword.jsx";
+import MyJobs from "../../components/MyJobs.jsx";
+import JobPost from "../../components/JobPost.jsx";
+import Applications from "../../components/Applications.jsx";
+import MyApplications from "../../components/MyApplications.jsx";
 
 const Dashboard = () => {
   const [show, setShow] = useState(false);

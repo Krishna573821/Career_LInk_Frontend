@@ -241,10 +241,10 @@ const Register = () => {
                         </div>
                      </>
                   )}
-                  <button type="submit" disabled={loading}> // Disable button while loading
+                  <button type="submit" disabled={loading}>
                      Register
                   </button>
-                  <Link to={"/login"}>Login Now</Link> // Link to login page
+                  <Link to={"/login"}>Login Now</Link> 
                </form>
             </div>
          </section>

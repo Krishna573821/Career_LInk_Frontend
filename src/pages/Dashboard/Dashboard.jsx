@@ -25,14 +25,10 @@ const Dashboard = () => {
   const navigateTo = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout()).then(() => {
-      toast.success("Logged out successfully.");
-      navigateTo("/"); 
-    }).catch(() => {
-      toast.error("Logout failed. Please try again.");
-    });
+    dispatch(logout());
+    toast.success("Logged out successfully.");
+    navigateTo("/");
   };
-  
   useEffect(() => {
     if (error) {
       toast.error(error);

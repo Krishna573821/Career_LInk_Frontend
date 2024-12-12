@@ -6,7 +6,7 @@ import { logout, clearAllUserErrors } from "../../store/slices/userSlice.js";
 import { LuMoveRight } from "react-icons/lu";
 import MyProfile from "../../components/MyProfile.jsx";
 import UpdateProfile from "../../components/UpdateProfile.jsx";
-import UpdatePassword from "../components/UpdatePassword.jsx";
+import UpdatePassword from "../../components/UpdatePassword.jsx";
 import MyJobs from "../../components/MyJobs.jsx";
 import JobPost from "../../components/JobPost.jsx";
 import Applications from "../../components/Applications.jsx";

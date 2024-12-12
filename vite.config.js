@@ -7,7 +7,7 @@ export default defineConfig({
    server: {
       proxy: {
          "/api": {
-            target: "https://career-link-backend-nu.vercel.app",
+            target: "https://career-link-backend-62pl.onrender.com",
          },
       },
    },

@@ -6,7 +6,7 @@ import {
   deleteApplication,
   fetchEmployerApplications,
   resetApplicationSlice,
-} from "../store/slices/applicationSlice";
+} from "../store/slices/applicationSlice.js";
 import Spinner from "./Spinner";
 import { Link } from "react-router-dom";
 

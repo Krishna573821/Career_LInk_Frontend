@@ -7,7 +7,7 @@ import {
   resetApplicationSlice,
   deleteApplication,
   fetchJobSeekerApplications,
-} from "../store/slices/applicationSlice";
+} from "../store/slices/applicationSlice.js";
 import Spinner from "../components/Spinner";
 
 const MyApplications = () => {
